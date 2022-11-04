@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/text.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <title>じゃんけん</title>
+    <script>
+    let gu_value = 1;
+    let choki_value = 2;
+    let par_value =3;
+    </script>
+</head>
+
+<body>
+
+    <header>
+        <h1>Bingo Game</h1>
+    </header>
+    <img style="display:none" src="img/bingo-gif-animé-2.gif" class="gif">
+    <p style="display:none"><span class="gamenumber">00</span></p>
+    <!-- <P id = "result">00</P> -->
+    <div class="button">
+        <button id="start">BINGO Gameを始める</button>   
+        <button id="start2" style="display:none;">Game Start</button>
+         <button id="start3" style="display:none;">番号を引く</button> 
+        
+    </div> 
+    <div class="button">抽選回数:<span id ="count">00</span></div>
+    <ul class="history-list" id="history-list"></ul>
+   
+       
+     <table style="display:none"> 
+      <thead>
+        <tr><th>B</th><th>I</th><th>N</th><th>G</th><th>O</th></tr>
+      </thead>
+      <tbody>
+           </tbody>
+     </table>
+
+    
+<script>  
+
+    const historyList = $('.history-list');
+{   const show = $("table,p,.gif");
+    $("button").on("click",function(){
+    show.show(2000);
+    $("#start").hide(500);
+    $("#start2").show(1000);
+});
+    $("#start2").on("click",function(){
+        var arr = [];
+    for (let i = 0 ; i < 75 ; i++){
+    arr[i] = i+1;
+};
+    var a = arr.length;
+ 
+//シャッフルアルゴリズム
+    while (a) {
+    var j = Math.floor( Math.random() * a );
+    var t = arr[--a];
+    arr[a] = arr[j];
+    arr[j] = t;
+}
+//シャッフルされた配列の要素を順番に表示する
+arr.forEach( function( value ) {console.log( value )} );
+
+
+
+
+$("#start3").show(500);
+        
+$("#start3").on("click",function (){
+    $("#start2").remove();
+    let thisCount = $("#count").html();
+        thisCount = Number(thisCount);
+        thisCount = thisCount + 1;    
+        $("#count").html(thisCount);
+    let numberselect = arr[thisCount-1];
+    $(".gamenumber").text(numberselect);
+        let resultnum = numberselect;
+        // resultnum += $("#result").append(arr[thisCount+(thisCount*-1)]);
+        $("#result").text(resultnum); 
+        const li = document.createElement('li');
+         li.textContent = resultnum + "|";
+         historyList.append(li);
+        
+        let judge = $(".gamenumber").text(numberselect);
+        
+    
+    
+    }
+    );
+
+
+});
+
+
+    function createColumn(col){
+    const source =[];
+    for (let i = 0; i < 15 ; i++ ){
+      source[i] = i + 1 + 15 * col; // i + 1は0スタートじゃなく1スタートにする
+    }
+
+//    const source= [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];   
+// Math.floor(Math.random()*(14+1))
+// Math.floor(Math.random()*source.length)
+const column=[]; //lengthをとるための定数を設定
+
+ for (let i = 0 ; i < 5 ; i++ ){
+    column[i] = source.splice(Math.floor(Math.random()* source.length),1)[0];
+ }
+ return column;
+}
+
+function createColumns() {
+    const columns = [];
+    for (let i = 0; i < 5; i++) {
+      columns[i] = createColumn(i);
+    }
+    columns[2][2] = 'FREE';
+    return columns;
+  }
+function renderBingo(columns){
+    for (let row = 0; row < 5; row++) {
+    const tr = document.createElement('tr');
+    for (let col = 0; col < 5; col++) {
+      const td = document.createElement('td');
+      td.textContent = columns[col][row];
+      tr.appendChild(td);
+    }
+    document.querySelector('tbody').appendChild(tr);
+  }
+    }
+    const columns = createColumns();
+    renderBingo(columns);
+    
+    
+  }
+
+  
+   
+ 
+
+
+    </script>
+</body>
+
+</html>

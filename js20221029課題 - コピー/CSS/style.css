@@ -1,0 +1,48 @@
+body{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+p{
+    font-size: 60px;
+    width: 80px;
+    text-align: center;
+    margin: auto;
+    box-shadow: 3px 3px 3px 3px #555;
+    border: solid 3px blue;
+}
+th,td{
+    background: pink;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+
+    
+}
+
+p,table,header{
+    margin: auto;
+    text-align: center;
+
+
+}
+
+img {
+    max-width: 100%;
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.button {
+    /*コレ*/display: flex;
+    /*コレ*/align-items: center;
+    /*コレ*/justify-content: center;
+}
+.history-list {
+    width:660px;
+}
+li{ 
+    float:left;
+    list-style: none; 
+}
